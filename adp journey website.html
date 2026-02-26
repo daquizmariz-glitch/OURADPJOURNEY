@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADP Senior High Journey</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box; 
+    font-family:Poppins,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(-45deg,#ff4d6d,#c77dff,#4cc9f0,#3a86ff);
+    background-size:400% 400%;
+    animation: gradientBG 12s ease infinite;
+    padding:20px;
+}
+
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    background:rgba(255,255,255,0.1);
+    backdrop-filter: blur(20px);
+    padding:35px;
+    border-radius:25px;
+    width:100%;
+    max-width:900px;
+    text-align:center;
+    color:white;
+    box-shadow:0 10px 40px rgba(0,0,0,0.3);
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+.hidden{display:none;}
+
+input{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:30px;
+    margin-top:20px;
+    outline:none;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    font-weight:bold;
+    background:white;
+    color:#3a86ff;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+    background:#3a86ff;
+    color:white;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+    margin-top:30px;
+}
+
+.card{
+    background:rgba(255,255,255,0.15);
+    padding:15px;
+    border-radius:25px;
+    cursor:pointer;
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.05);
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:20px;
+}
+
+.story{
+    text-align:justify;
+    font-size:14px;
+    line-height:1.7;
+    margin-top:15px;
+}
+
+h1,h2{
+    background: linear-gradient(to right,#fff,#c77dff,#4cc9f0);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="container" id="page1">
+    <h1>✨ ADP Senior High Journey ✨</h1>
+    <p>Enter your name to continue</p>
+    <input type="text" id="nameInput" placeholder="who are you?...">
+    <button onclick="goPage2()">Next</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="container hidden" id="page2">
+    <h2>🌸 About This Website</h2>
+    <p>
+    This website is created for school purposes and serves as a digital platform for students 
+    to showcase their Senior High School journey at Academia de Pulilan. 
+    It highlights personal growth, achievements, friendships, and meaningful memories 
+    throughout their academic life.
+    </p>
+    <button onclick="goGirls()">Next</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="container hidden" id="page3">
+    <h2>Our Journey 🌸</h2>
+    <div class="grid">
+
+        <div class="card" onclick="goGirl(1)">
+            <img src="cj.png">
+            <h4>Christine Jade</h4>
+        </div>
+
+        <div class="card" onclick="goGirl(2)">
+            <img src="mariz.png">
+            <h4>Mariz Kylie</h4>
+        </div>
+
+        <div class="card" onclick="goGirl(3)">
+            <img src="kaycee.png">
+            <h4>Kaycee</h4>
+        </div>
+
+        <div class="card" onclick="goGirl(4)">
+            <img src="JANE.png">
+            <h4>Rose Jane</h4>
+        </div>
+
+        <div class="card" onclick="goGirl(5)">
+            <img src="nicks.jpg">
+            <h4>Nicole</h4>
+        </div>
+
+        <div class="card" onclick="goGirl(6)">
+            <img src="glynish.png">
+            <h4>Glynish Rhahaya</h4>
+        </div>
+
+        <div class="card" onclick="goGirl(7)">
+            <img src="jasmine.png">
+            <h4>Jasmine</h4>
+        </div>
+
+        <!-- LEAVE BUTTON -->
+        <div class="card" onclick="goHome()">
+            <img src="bye.gif">
+            <h4>Leave</h4>
+        </div>
+
+    </div>
+</div>
+
+<!-- GIRL STORY PAGE -->
+<div class="container hidden" id="girlPage">
+    <h2 id="girlTitle"></h2>
+    <img id="girlImg" style="width:250px;border-radius:20px;margin-top:20px;">
+    <p class="story" id="girlText"></p>
+    <button onclick="goGirls()">Back 😊</button>
+</div>
+
+<script>
+
+function goPage2(){
+    let name=document.getElementById("nameInput").value;
+    if(name.trim()===""){
+        alert("Please enter your name 😊");
+        return;
+    }
+    document.getElementById("page1").classList.add("hidden");
+    document.getElementById("page2").classList.remove("hidden");
+}
+
+function goGirls(){
+    document.querySelectorAll(".container").forEach(div=>{
+        div.classList.add("hidden");
+    });
+    document.getElementById("page3").classList.remove("hidden");
+}
+
+function goGirl(num){
+    let title="", text="", img="";
+
+    if(num===1){
+        title="Christine Jade's Journey";
+        text="My 2-year journey as a HUMSS student at Academia de Pulilan was unforgettable...";
+        img="jj.png";
+    }
+
+    if(num===2){
+        title="Mariz Kylie's Journey";
+        text="My journey in Academia de Pulilan has been a memorable chapter filled with growth...";
+        img="riz.png";
+    }
+
+    if(num===3){
+        title="Kaycee's Journey";
+        text="My two-year journey at Academia de Pulilan School was meaningful...";
+        img="kayceeee.png";
+    }
+
+    if(num===4){
+        title="Rose Jane's Journey";
+        text="My journey in Academia de Pulilan has been memorable and meaningful...";
+        img="rose.png";
+    }
+
+    if(num===5){
+        title="Nicole's Journey";
+        text="Spending my senior high school journey in HUMSS became one of the most meaningful chapters...";
+        img="nekol.png";
+    }
+
+    if(num===6){
+        title="Glynish Rhahaya's Journey";
+        text="My years in Academia de Pulilan were full of growth and unforgettable memories...";
+        img="gly.png";
+    }
+
+    if(num===7){
+        title="Jasmine's Journey";
+        text="My two-year journey as a HUMSS student has been one of the most meaningful chapters of my life...";
+        img="jaja.png";
+    }
+
+    document.querySelectorAll(".container").forEach(div=>{
+        div.classList.add("hidden");
+    });
+
+    document.getElementById("girlPage").classList.remove("hidden");
+    document.getElementById("girlTitle").innerText=title;
+    document.getElementById("girlText").innerText=text;
+    document.getElementById("girlImg").src=img;
+}
+
+/* NEW FUNCTION */
+function goHome(){
+    document.querySelectorAll(".container").forEach(div=>{
+        div.classList.add("hidden");
+    });
+    document.getElementById("page1").classList.remove("hidden");
+    document.getElementById("nameInput").value="";
+}
+
+</script>
+
+</body>
+</html>
